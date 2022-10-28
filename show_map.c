@@ -56,7 +56,7 @@ void	show_map(t_game *game)
 	idx = 0;
 	while (game->map[idx] != '\0')
 	{
-        mlx_string_put(game->mlx_ptr, game->win_ptr, 32, 32, 0x000000, ft_itoa(game->cnt));
+        //mlx_string_put(game->mlx_ptr, game->win_ptr, 32, 32, 0x000000, ft_itoa(game->cnt));
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.road,
 			(idx % game->map_wid) * TS, (idx / game->map_wid) * TS);
 		if (game->end_flag == 1)

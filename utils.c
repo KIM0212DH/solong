@@ -23,7 +23,7 @@ int	checkopen_size(char *filename, t_game *game)
 		print_err_exit("File open fail Error", game);
 	line = get_next_line(fd);
 	if (line == 0)
-		print_err_exit("File empty Error", game);
+		print_err_exit2("File empty Error", line);
 	game->map_wid = ft_strlen(line) - 1;
 	while (line > 0)
 	{
@@ -31,20 +31,19 @@ int	checkopen_size(char *filename, t_game *game)
 		{
 			if (game->map_wid != (int)ft_strlen(line) - 1)
 			{
-				free(line);
-				print_err_exit("line align Error", game);
+				print_err_exit2("line align Error", line);
 			}
 		}
 		else if (line[ft_strlen(line)] == '\0')
 		{
 			if (game->map_wid != (int)ft_strlen(line))
 			{
-				free(line);
-				print_err_exit("line align Error", game);
+				print_err_exit2("line align Error", line);
 			}
 		}
 		game->map_hei = game->map_hei + 1;
 		ft_printf("game->map_hei : %d game->map_wid : %d\n", game->map_hei, game->map_wid);
+		free(line);
 		line = get_next_line(fd);
 	}
 	size = game->map_hei * game->map_wid;
@@ -110,6 +109,7 @@ char	*fill_map(char *map, char *filename, t_game *game)
 			ft_memcpy(map + idx, line, ft_strlen(line));
 			idx = idx + ft_strlen(line);
 		}
+		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
