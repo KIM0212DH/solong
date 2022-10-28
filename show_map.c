@@ -18,7 +18,7 @@ void	show_ending(t_game *game)
 		game->img.ending, game->map_wid * TS / 3, 0);
 	ft_printf("\n\njongryo\n\n");
 	free(game->map);
-	system("leaks --list -- solong >> log.txt");
+	system("leaks --list -- solong");
 	exit(0);
 }
 

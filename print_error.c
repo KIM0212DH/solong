@@ -15,7 +15,23 @@
 void	print_err_exit(char *msg, t_game *game)
 {
 	ft_printf("%s\n", msg);
-	free(game->map);
+	if (game->map)
+	{
+		ft_printf("\nyogi\n");
+		free(game->map);
+	}
 	system("leaks --list -- solong");
 	exit(1);
+}
+
+void	print_err_exit2(char *msg)
+{
+	ft_printf("%s\n", msg);
+	system("leaks --list -- solong");
+	exit(1);
+}
+
+void	print_err_exit3(char *msg)
+{
+	
 }
