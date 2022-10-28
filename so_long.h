@@ -62,6 +62,7 @@ typedef struct s_game
 	int			end_flag;
 	int			cnt;
     int         exit_cnt;
+	int			size;
 	t_player	player;
 	t_img		img;
 }	t_game;
@@ -79,5 +80,6 @@ int		exit_game(t_game *game);
 void	check_direction(t_game *game);
 void	clear_exit_game(t_game *game);
 void	show_condition(int idx, t_game *game);
+void	print_err_exit2(char *msg, char *line);
 
 #endif

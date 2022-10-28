@@ -55,11 +55,14 @@ int	checkopen_size(char *filename, t_game *game)
 void	checking_1d_arr(int idx, char *map, t_game *game)
 {
 	idx = 0;
-	while (map[idx] != '\0')
+	while (idx < game->size)
 	{
 		if ((idx < game->map_wid && map[idx] != '1')
 			|| ((idx > game->map_wid * (game->map_hei - 1)) && map[idx] != '1'))
-			print_err_exit("wall Error", game);
+			{
+				ft_printf("%d, %c,%c, %c", idx,map[idx-1],map[idx],map[idx+1]);
+				print_err_exit("wall Error", game);
+			}
 		if ((idx % game->map_wid == 0 && map[idx] != '1')
 			|| (idx % game->map_wid == game->map_wid - 1 && map[idx] != '1'))
 			print_err_exit("wall Error", game);
@@ -122,6 +125,7 @@ int	read_map(char *filename, t_game *game)
 	int	size;
 
 	size = checkopen_size(filename, game);
+	game->size = size;
 	game->map = (char *) malloc (sizeof(char) * (size + 1));
 	if (!(game->map))
 	{

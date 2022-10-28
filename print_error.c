@@ -28,4 +28,3 @@ void	print_err_exit2(char *msg, char *line)
 	system("leaks --list -- solong");
 	exit(1);
 }
-
