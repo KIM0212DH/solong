@@ -6,7 +6,7 @@
 /*   By: dokim2 <dokim2@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:15:13 by dokim2            #+#    #+#             */
-/*   Updated: 2022/10/11 16:35:30 by dokim2           ###   ########.fr       */
+/*   Updated: 2022/10/28 21:02:08 by dokim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	show_ending(t_game *game)
 {
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-		game->img.ending, game->map_wid * TS / 3, 0);
-	ft_printf("\n\njongryo\n\n");
+	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	free(game->map);
-	system("leaks --list -- solong");
+	ft_printf("complete!\n");
+	system("leaks --list -- so_long");
 	exit(0);
 }
 
@@ -56,7 +55,6 @@ void	show_map(t_game *game)
 	idx = 0;
 	while (game->map[idx] != '\0')
 	{
-        //mlx_string_put(game->mlx_ptr, game->win_ptr, 32, 32, 0x000000, ft_itoa(game->cnt));
 		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.road,
 			(idx % game->map_wid) * TS, (idx / game->map_wid) * TS);
 		if (game->end_flag == 1)

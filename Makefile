@@ -13,9 +13,9 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-NAME = solong
+NAME = so_long
 
-SOLONG_NAME = solong.a
+SOLONG_NAME = so_long.a
 
 GET_NEXT_LINE_DIR = ./get_next_line
 GET_NEXT_LINE = $(GET_NEXT_LINE_DIR)/get_next_line.a
@@ -29,8 +29,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = ./minilibx_opengl_20191021
 MLX = $(MLX_DIR)/mlx.h
 
-SOLONG_FILE = so_long.c utils.c print_error.c show_map.c img_init.c key_press.c exit_game.c check_direction.c
-SOLONG_BONUS_FILE = bonus/so_long_bonus.c bonus/utils_bonus.c bonus/print_error_bonus.c bonus/show_map_bonus.c bonus/img_init_bonus.c bonus/key_press_bonus.c bonus/exit_game_bonus.c bonus/check_direction_bonus.c
+SOLONG_FILE = so_long.c utils.c print_error.c show_map.c img_init.c key_press.c exit_game.c check_direction.c check_map_1darr.c
+#SOLONG_BONUS_FILE = bonus/so_long_bonus.c bonus/utils_bonus.c bonus/print_error_bonus.c bonus/show_map_bonus.c bonus/img_init_bonus.c bonus/key_press_bonus.c bonus/exit_game_bonus.c bonus/check_direction_bonus.c
 
 INCS	= so_long.h
 
@@ -58,8 +58,8 @@ $(FT_PRINTF) :
 $(LIBFT) : 
 	make -C $(LIBFT_DIR)
 
-bonus :
-	make DO_BONUS=1
+#bonus :
+#	make DO_BONUS=1
 	
 clean :
 	rm -f $(SOLONG_OBJECT)

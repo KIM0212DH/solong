@@ -6,7 +6,7 @@
 /*   By: dokim2 <dokim2@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:02:40 by dokim2            #+#    #+#             */
-/*   Updated: 2022/10/11 18:21:53 by dokim2           ###   ########.fr       */
+/*   Updated: 2022/10/28 21:02:42 by dokim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	argv[1] = "map.ber";
-    if (argc != 1)
-        print_err_exit("we need ./solong map_name.ber", &game);
+	if (argc != 2)
+		print_err_exit3("we need ./solong map_name.ber");
 	game_play_init(&game);
-	if (!read_map("map.ber", &game))
-		print_err_exit("map Error", &game);
+	if (!read_map(argv[1], &game))
+		print_err_exit3("map Error");
 	game.mlx_ptr = mlx_init();
 	img_init(&game);
 	game.win_ptr = mlx_new_window(game.mlx_ptr, game.map_wid * TS,

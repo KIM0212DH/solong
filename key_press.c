@@ -117,13 +117,11 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == KEY_A)
 		move_a(game);
 	else if (keycode == KEY_ESC)
-		exit(0);
+		exit_game(game);
 	ft_printf("x: %d, y: %d\n", game->player.x, game->player.y);
 	ft_printf("collection : %d\n", game->collection);
-	ft_printf("move cnt: %d\n", game->cnt);
+	ft_printf("move cnt: %d\n\n", game->cnt);
 	check_direction(game);
 	show_map(game);
-	if (game->end_flag == 1)
-		ft_printf("complete!\n");
 	return (0);
 }

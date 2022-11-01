@@ -16,6 +16,6 @@ int	exit_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	free(game->map);
-	system("leaks --list -- solong");
+	system("leaks --list -- so_long");
 	exit(0);
 }

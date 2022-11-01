@@ -6,7 +6,7 @@
 /*   By: dokim2 <dokim2@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:13:16 by dokim2            #+#    #+#             */
-/*   Updated: 2022/10/11 18:24:05 by dokim2           ###   ########.fr       */
+/*   Updated: 2022/10/28 21:27:18 by dokim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,70 +15,22 @@
 int	checkopen_size(char *filename, t_game *game)
 {
 	int		fd;
-	int		size;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		print_err_exit("File open fail Error", game);
+		print_err_exit3("File open fail Error");
 	line = get_next_line(fd);
 	if (line == 0)
 		print_err_exit2("File empty Error", line);
 	game->map_wid = ft_strlen(line) - 1;
-	while (line > 0)
-	{
-		if (line[ft_strlen(line) - 1] == '\n')
-		{
-			if (game->map_wid != (int)ft_strlen(line) - 1)
-			{
-				print_err_exit2("line align Error", line);
-			}
-		}
-		else if (line[ft_strlen(line)] == '\0')
-		{
-			if (game->map_wid != (int)ft_strlen(line))
-			{
-				print_err_exit2("line align Error", line);
-			}
-		}
-		game->map_hei = game->map_hei + 1;
-		ft_printf("game->map_hei : %d game->map_wid : %d\n", game->map_hei, game->map_wid);
-		free(line);
-		line = get_next_line(fd);
-	}
-	size = game->map_hei * game->map_wid;
-	ft_printf("%d\n", size);
-	free(line);
-	return (size);
+	check_map(fd, line, game);
+	return (game->map_hei * game->map_wid);
 }
 
 void	checking_1d_arr(int idx, char *map, t_game *game)
 {
-	idx = 0;
-	while (idx < game->size)
-	{
-		if ((idx < game->map_wid && map[idx] != '1')
-			|| ((idx > game->map_wid * (game->map_hei - 1)) && map[idx] != '1'))
-			{
-				ft_printf("%d, %c,%c, %c", idx,map[idx-1],map[idx],map[idx+1]);
-				print_err_exit("wall Error", game);
-			}
-		if ((idx % game->map_wid == 0 && map[idx] != '1')
-			|| (idx % game->map_wid == game->map_wid - 1 && map[idx] != '1'))
-			print_err_exit("wall Error", game);
-		if (map[idx] == 'C')
-			game->collection++;
-		if (map[idx] == 'P')
-		{
-			if (game->player.x != -1 || game->player.y != -1)
-				print_err_exit("more than one player\n", game);
-			game->player.x = idx % game->map_wid;
-			game->player.y = idx / game->map_wid;
-		}
-		if (map[idx] == 'E')
-			game->exit_cnt++;
-		idx++;
-	}
+	check_1d_char(idx, map, game);
 	if (game->player.x == -1 || game->player.y == -1)
 		print_err_exit("no player Error", game);
 	if (game->collection == 0)
@@ -95,11 +47,7 @@ char	*fill_map(char *map, char *filename, t_game *game)
 
 	idx = 0;
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		print_err_exit("File open fail Error", game);
 	line = get_next_line(fd);
-	if (line == 0)
-		print_err_exit("File empty Error", game);
 	while (line > 0)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')

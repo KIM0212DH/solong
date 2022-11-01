@@ -6,7 +6,7 @@
 /*   By: dokim2 <dokim2@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:32:29 by dokim2            #+#    #+#             */
-/*   Updated: 2022/10/11 18:44:56 by dokim2           ###   ########.fr       */
+/*   Updated: 2022/11/01 12:38:58 by dokim2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_game
 	int			collection;
 	int			end_flag;
 	int			cnt;
-    int         exit_cnt;
+	int			exit_cnt;
 	int			size;
 	t_player	player;
 	t_img		img;
@@ -78,8 +78,11 @@ void	show_map(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		exit_game(t_game *game);
 void	check_direction(t_game *game);
-void	clear_exit_game(t_game *game);
 void	show_condition(int idx, t_game *game);
 void	print_err_exit2(char *msg, char *line);
+void	print_err_exit3(char *msg);
+void	check_map(int fd, char *line, t_game *game);
+void	check_1d_char(int idx, char *map, t_game *game);
+void	check_correct_input(char input, t_game *game);
 
 #endif
